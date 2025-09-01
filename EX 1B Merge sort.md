@@ -1,42 +1,71 @@
 # EX 1B Merge Sort
-## DATE:
-## AIM:
-Write a Python Program to print factorial of a number recursively.
 
+## DATE: 08-04-2025
+
+## AIM:
+
+To write a python program to sort the first half of the list using merge sort.
 
 ## Algorithm
-Read an integer num from the user.
-If num < 0, print "Invalid input! Please enter a positive number."
-If num == 0, print "Factorial of number 0 is 1".
-Otherwise, call recursive_factorial(num) to calculate the factorial recursively.
-Print "Factorial of number num = result".
+
+1. If the array has more than one element, split it into two halves.
+2. Recursively apply merge sort on both halves.
+3. Compare elements of both halves and merge them into a sorted array.
+4. Copy any remaining elements from the left or right half.
+5. Return the fully sorted array.
 
 ## Program:
-```
-/*
-Program to implement Merge Sort
-Developed by: S Harish
-Register Number:212223040062
-def recursive_factorial(n):
-  if n==0:
-      return 1
-  else:
-      return n*recursive_factorial(n-1)
- 
-num = int(input())
-if num < 0:
-  print("Invalid input ! Please enter a positive number.")
-elif num == 0:
-  print("Factorial of number 0 is 1")
-else:
-  print("Factorial of number", num, "=", recursive_factorial(num))
-*/
+
+```python
+# Program to implement Merge Sort
+
+
+def merge_sort(inp_arr):
+    if len(inp_arr) > 1:
+        mid = len(inp_arr) // 2
+        left_half = inp_arr[:mid]
+        right_half = inp_arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                inp_arr[k] = left_half[i]
+                i += 1
+            else:
+                inp_arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            inp_arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            inp_arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+inp_arr = []
+n = int(input())
+for i in range(n):
+    inp_arr.append(int(input()))
+
+print("Input Array:\n")
+print(inp_arr)
+
+merge_sort(inp_arr)
+
+print("Sorted Array:\n")
+print(inp_arr)
 ```
 
 ## Output:
 
-<img width="998" height="301" alt="image" src="https://github.com/user-attachments/assets/1a9c53d4-9841-4cc9-abb2-3d6d75c867cd" />
-
+![alt text](image-2.png)
 
 ## Result:
+
 The program successfully sorts the first half of the given array using merge sort. where only the first half is sorted, and the second half remains unchanged.
